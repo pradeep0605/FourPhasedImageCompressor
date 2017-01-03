@@ -1,0 +1,32 @@
+Author: Pradeep Kashyap
+
+This project compresses Image file into a file format named .pkr (yes, I am self-centric :P)
+
+It uses aggregation (averaging pixel values), bit truncation (kind of quantization),
+RLE (Run Length Encoding) and Huffman Coding as the phases. These phases are pipelined 
+and output of one phase is the input to the other (in the sequence listed).
+
+The compression/decompression can be optimized by avoiding the write to intermediate files.
+Each of the phases write their result to a file and the next phase picks it from the file.
+This has lot of IOs and thus a bit slow. If interested in optimizing, you can contribute :)
+
+Note that this compressor takes only .bmp files as input. It doesn't understand
+any other file format like .jpeg (jpeg file are already in a compressed format :) )
+
+To compile the compressor:
+
+> make
+
+To Run the compressor:
+
+> ./comp Image_file.bmp
+
+This would create a file name Image_file.bmp.pkr (Compressed file)
+
+TO Uncompress:
+
+> ./decomp Image_file.bmp.pkr
+
+This would generate a file named finalOut.bmp, which is the decompressed file (.bmp format).
+
+Enjoy ! :)
